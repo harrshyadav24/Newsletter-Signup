@@ -50,12 +50,8 @@ app.post("/failure", function (req, res) {
 })
 
 // process.env.PORT is used for heroku server while we want our code to run on both heroku server and our local(computer) we use || 3000.
-app.listen(process.env.PORT || 3000, function () {
+const port = process.env.PORT || 3000;
+app.listen(port, function () {
     console.log("Server is running on port 3000");
 })
 
-// API key mailchimp
-// 4e6753cb8edd92d409bed35e0c4ab0ba-us18
-
-// Audience Id
-// 7b6cfff4b6
