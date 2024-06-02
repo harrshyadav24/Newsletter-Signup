@@ -1,9 +1,15 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+require('dotenv').config();
+
+const apiKey = process.env.API_KEY;
+const serverId = process.env.SERVER;
+const audId = process.env.AUD_ID;
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
+
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/signup.html");
@@ -18,12 +24,12 @@ app.post("/", function (req, res) {
     const client = require("@mailchimp/mailchimp_marketing");
 
     client.setConfig({
-        apiKey: "4e6753cb8edd92d409bed35e0c4ab0ba-us18",
-        server: "us18",
+        apiKey: apiKey,
+        server: serverId,
     });
 
     const run = async () => {
-        const response = await client.lists.batchListMembers("7b6cfff4b6", {
+        const response = await client.lists.batchListMembers(audId, {
             members: [{
                 email_address: email,
                 email_type: "text",
